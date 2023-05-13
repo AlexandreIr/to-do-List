@@ -1,0 +1,10 @@
+h1{
+    border-bottom-style:inset ;
+}
+.selected-task{
+    color: red;
+    font-style: italic;
+}
+.normal-task{
+    color: black;
+}
