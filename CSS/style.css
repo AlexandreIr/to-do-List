@@ -8,6 +8,10 @@
     margin-left:2rem;
     margin-top: 2rem;
 }
+#tasks-area{
+    margin-top: 3rem;
+    width: 60%;
+}
 
 
 input[type="submit"]{
@@ -28,16 +32,24 @@ body{
     font-size: 20px;
 }
 .exclude{
-    margin-left: 30rem;
     cursor: pointer;
 }
 table{
     background-color:azure;
+    width: 100%;
 }
-td{
+td, th{
+    text-align: start;
     border-bottom-style: inset;
 }
-tr:hover{
+.exclude:hover{
     color: rgb(255, 46, 46);
     font-style: italic;
 }
+.edit{
+    cursor: pointer;
+}
+.edit:hover{
+    color: rgb(28, 28, 247);
+}
+

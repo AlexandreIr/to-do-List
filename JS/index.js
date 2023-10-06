@@ -8,6 +8,12 @@ form.addEventListener('submit', (e)=>{
 
     form.reset();
     form.taskInput.focus();
+
+    localStorage.removeItem('tasks');
+    for(let i=1; i<tbTasks.rows.length; i++){
+        const auxTasks=tbTasks.rows[i].cells[0].innerText;
+        record(auxTasks);
+    }
 })
 //display and recor tasks
 const createTask=(task)=>{
@@ -15,11 +21,11 @@ const createTask=(task)=>{
 
     const col1=line.insertCell(0);
     const col2=line.insertCell(1);
+    const col3=line.insertCell(2);
 
     col1.innerText=task;
-    col2.innerHTML="<i class='exclude' title='Exclude'> &#10008</i>";
-    col2.classList.add('exclude');
-    record(col1.innerText);
+    col3.innerHTML="<i class='exclude' title='Exclude'> &#10008</i>";
+    col2.innerHTML="<i class='edit' title='edit'> &#x270E</i>";
 }
 //records tasks on localStorage
 const record=(task)=>{
@@ -44,6 +50,15 @@ const exclusion=(e)=>{
         record(auxTasks);
     }
 }
+
+const edition=(e)=>{
+    if(e.target.classList.contains('edit')){
+        const task=e.target.parentElement.parentElement.children[0].innerText;
+        form.taskInput.value=task;
+        form.taskInput.focus();
+        localStorage.removeItem('tasks');
+    }
+}
 //load saved tasks 
 window.addEventListener('load', ()=>{
     if(localStorage.getItem('tasks')){
@@ -53,4 +68,5 @@ window.addEventListener('load', ()=>{
 })
 
 tbTasks.addEventListener('click', exclusion)
+tbTasks.addEventListener('click', edition)
 
