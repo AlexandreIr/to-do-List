@@ -1,6 +1,6 @@
 const form=document.querySelector('form');
 const tbTasks=document.querySelector('table');
-
+//submit event
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     const task=form.taskInput.value;
@@ -9,7 +9,7 @@ form.addEventListener('submit', (e)=>{
     form.reset();
     form.taskInput.focus();
 })
-
+//display and recor tasks
 const createTask=(task)=>{
     const line = tbTasks.insertRow(-1);
 
@@ -21,7 +21,7 @@ const createTask=(task)=>{
     col2.classList.add('exclude');
     record(col1.innerText);
 }
-
+//records tasks on localStorage
 const record=(task)=>{
     if(localStorage.getItem('tasks')){
         const recordedtasks=localStorage.getItem('tasks')+';'+task ;
@@ -30,7 +30,7 @@ const record=(task)=>{
         localStorage.setItem('tasks', task);
     }
 }
-
+//excludes tasks
 const exclusion=(e)=>{
     if(e.target.classList.contains('exclude')){
         const task=e.target.parentElement.parentElement.children[0].innerText;
@@ -44,7 +44,7 @@ const exclusion=(e)=>{
         record(auxTasks);
     }
 }
-
+//load saved tasks 
 window.addEventListener('load', ()=>{
     if(localStorage.getItem('tasks')){
         const tasks=localStorage.getItem('tasks').split(';');
