@@ -3,8 +3,10 @@ const tbTasks=document.querySelector('table');
 //submit event
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
+    
     const task=form.taskInput.value;
     createTask(task);
+
 
     form.reset();
     form.taskInput.focus();
@@ -14,8 +16,9 @@ form.addEventListener('submit', (e)=>{
         const auxTasks=tbTasks.rows[i].cells[0].innerText;
         record(auxTasks);
     }
+    
 })
-//display and recor tasks
+//display tasks
 const createTask=(task)=>{
     const line = tbTasks.insertRow(-1);
 
@@ -54,9 +57,15 @@ const exclusion=(e)=>{
 const edition=(e)=>{
     if(e.target.classList.contains('edit')){
         const task=e.target.parentElement.parentElement.children[0].innerText;
-        form.taskInput.value=task;
-        form.taskInput.focus();
+        const cell=e.target.parentElement.parentElement.children[0];
+        const promptCell=prompt('Digite novo texto', task);
+
+        if(promptCell!=task) cell.innerText=promptCell;
         localStorage.removeItem('tasks');
+        for(let i=1; i<tbTasks.rows.length; i++){
+            const auxTasks=tbTasks.rows[i].cells[0].innerText;
+            record(auxTasks);
+        }    
     }
 }
 //load saved tasks 
